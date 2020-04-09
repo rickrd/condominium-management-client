@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Header from '../organisms/Header'
+
 const HomeWrapper = styled.div`
   margin: 0;
   font-family: 'Roboto';
@@ -11,6 +13,7 @@ const HomeWrapper = styled.div`
 const Home = () => {
   return (
     <HomeWrapper>
+      <Header></Header>
       <div>This is the home</div>
     </HomeWrapper>
   )
