@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Home from './components/pages/Home'
+import ResponsiveDrawer from './components/organisms/ResponsiveDrawer'
 import LoginForm from './components/organisms/LoginForm'
 import { getAuthentication, getUserMetadata } from './contexts/Authentication'
 
@@ -22,7 +22,7 @@ function App(props) {
   // If user is not logged, return login form
   if (loginStatus === false) return <LoginForm></LoginForm>
 
-  if (loginStatus && email !== '') return <Home></Home>
+  if (loginStatus && email !== '') return <ResponsiveDrawer></ResponsiveDrawer>
 
   return null
 }
