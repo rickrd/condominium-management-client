@@ -2,7 +2,7 @@ import { UPDATE_USER_EMAIL, UPDATE_USER_LOGIN_STATUS} from './actions'
 
 const initialState = {
   user: {
-    loginStatus: false,
+    loginStatus: null,
     email: ''
   }
 }
@@ -17,7 +17,7 @@ const user = (state = {}, action) => {
 
     case UPDATE_USER_LOGIN_STATUS:
       return Object.assign({}, state, {
-          loginStatus: true,
+          loginStatus: action.status,
           email: state.email
       })
     
