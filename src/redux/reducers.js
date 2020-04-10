@@ -1,8 +1,8 @@
-import { UPDATE_USER_EMAIL} from './actions'
+import { UPDATE_USER_EMAIL, UPDATE_USER_LOGIN_STATUS} from './actions'
 
 const initialState = {
   user: {
-    isLoggedIn: false,
+    loginStatus: false,
     email: ''
   }
 }
@@ -11,10 +11,14 @@ const user = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_USER_EMAIL:
       return Object.assign({}, state, {
-        user: {
-          isLoggedIn: true,
+          loginStatus: state.loginStatus,
+          email: action.email
+      })
+
+    case UPDATE_USER_LOGIN_STATUS:
+      return Object.assign({}, state, {
+          loginStatus: true,
           email: state.email
-        }
       })
     
     default:
