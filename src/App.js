@@ -18,11 +18,13 @@ function App(props) {
     // If user is logged and email is empty, check for user email
     getUserMetadata(dispatch)
   }
-  
+
   // If user is not logged, return login form
   if (loginStatus === false) return <LoginForm></LoginForm>
 
-  return <Home></Home>
+  if (loginStatus && email !== '') return <Home></Home>
+
+  return null
 }
 
 const mapStateToProps = (state) => {
