@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import Button from '@material-ui/core/Button'
 
 import { handleLogout } from '../../contexts/Authentication'
 
@@ -16,12 +17,16 @@ const Logout = (props) => {
 
   if (loginStatus)
     return (
-      <LogoutWrapper
-        onClick={() => {
-          handleLogout(dispatch)
-        }}
-      >
-        LOGOUT
+      <LogoutWrapper>
+        <Button
+          onClick={() => {
+            handleLogout(dispatch)
+          }}
+          variant="contained"
+          color="secondary"
+        >
+          LOGOUT
+        </Button>
       </LogoutWrapper>
     )
 
