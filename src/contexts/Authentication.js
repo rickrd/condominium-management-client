@@ -1,6 +1,6 @@
 import { Magic } from 'magic-sdk'
 
-import { updateUserLoginStatus } from '../redux/actions'
+import { updateUserLoginStatus, updateUserEmail } from '../redux/actions'
 
 const magic = new Magic(`${process.env.REACT_APP_MAGIC_KEY}`)
 
@@ -10,9 +10,7 @@ export const handleLogin = async (e, dispatch) => {
   if (email) {
     await magic.auth
       .loginWithMagicLink({ email })
-      .then((res) => {
-        console.log('login')
-        console.log(res)
+      .then(() => {
         dispatch(updateUserLoginStatus(true))
       })
       .catch((error) => {
@@ -21,26 +19,22 @@ export const handleLogin = async (e, dispatch) => {
   }
 }
 
-const handleLogout = async (setIsLoggedIn, setUserEmail) => {
+export const handleLogout = async (dispatch) => {
   await magic.user.logout().then((res) => {
-    setIsLoggedIn(false)
-    setUserEmail(false)
+    dispatch(updateUserLoginStatus(false))
   })
 }
 
-export const getAuthentication = async () => {
+export const getAuthentication = async (dispatch) => {
   const { user } = magic
-  const UserIsLoggedIn = await user.isLoggedIn()
-
-  const isLoggedIn = UserIsLoggedIn
-
-  return isLoggedIn
+  await user.isLoggedIn().then(res => {
+    dispatch(updateUserLoginStatus(res))
+  })
 }
 
-const getUserMetadata = async () => {
+export const getUserMetadata = async (dispatch) => {
   const { user } = magic
-  const userMetadata = await user.getMetadata()
-
-  const metadata = userMetadata
-  return metadata
+  await user.getMetadata().then(res => {
+    dispatch(updateUserEmail(res.email))
+  })
 }
