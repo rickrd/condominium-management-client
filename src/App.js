@@ -1,36 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-
 import Home from './components/pages/Home'
 import LoginForm from './components/organisms/LoginForm'
-import {getAuthentication} from './contexts/Authentication'
-import {updateUserEmail} from './redux/actions'
-import {updateUserLoginStatus} from './redux/actions'
-
+import { getAuthentication, getUserMetadata } from './contexts/Authentication'
 
 function App(props) {
-  console.log(props)
-  const { user, dispatch } = props
-  console.log(user)
+  const {
+    user: { loginStatus, email },
+    dispatch,
+  } = props
 
-  if (!user.loginStatus) {
-    getAuthentication()
-      .then((res) => {
-        console.log(res)
-        dispatch(updateUserLoginStatus({res}))
-      })
-    return <LoginForm></LoginForm>
+  // First check to see if user is logged or not
+  if (loginStatus === null) {
+    getAuthentication(dispatch)
+  } else if (loginStatus && email === '') {
+    // If user is logged and email is empty, check for user email
+    getUserMetadata(dispatch)
   }
+  
+  // If user is not logged, return login form
+  if (loginStatus === false) return <LoginForm></LoginForm>
 
-  return (
-      <Home></Home>
-  )
+  return <Home></Home>
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 
