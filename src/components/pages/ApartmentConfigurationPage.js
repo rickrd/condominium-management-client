@@ -23,7 +23,10 @@ const apartmentSchema = {
       type: 'text',
     },
   },
-  listingQuery: GET_APARTMENTS,
+  listingQuery: {
+    name: "apartments",
+    value: GET_APARTMENTS
+  },
 }
 
 const ApartmentConfigurationPage = () => {

@@ -1,17 +1,28 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import QueryDataList from '../molecules/QueryDataList'
 
-const ConfigurationPage = ({ schema: { name, properties, listingQuery } }) => {
+const StyledConfigurationPageMain = styled.main`
+  width: 100%;
+  
+  .title {
+    margin-top: 0;
+  }
+`
+
+const ConfigurationPage = ({ schema }) => {
+  const { name, properties, listingQuery } = schema
+
   return (
-    <main>
+    <StyledConfigurationPageMain>
       <header>
-        <h1>{name}(s)</h1>
+        <h1 className="title">{name}(s)</h1>
         <button>create {name}</button>
       </header>
 
-      <QueryDataList query={listingQuery} />
-    </main>
+      <QueryDataList schema={schema} query={listingQuery} />
+    </StyledConfigurationPageMain>
   )
 }
 

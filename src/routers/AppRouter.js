@@ -12,10 +12,11 @@ import { useAuthentication } from '../hooks/useAuthentication'
 const StyledMainWrapper = styled.div`
   display: flex;
   margin-top: 80px;
+  padding: 0 16px;
 
   @media (min-width: 600px) {
-    margin-top: 88px;
-    margin-left: 264px;
+    max-width: 600px;
+    margin: 88px auto 0 264px;
   }
 `
 
