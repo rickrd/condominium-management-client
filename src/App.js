@@ -1,36 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { createStore } from 'redux'
+import { Provider as ReduxProvider } from 'react-redux'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
 
-import LoginForm from './components/organisms/LoginForm'
-import { getAuthentication, getUserMetadata } from './contexts/Authentication'
+import reducers from './redux/reducers'
 import AppRouter from './routers/AppRouter'
 
-function App(props) {
-  const {
-    user: { loginStatus, email },
-    dispatch,
-  } = props
+// setup your client
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/dev/graphql',
+})
 
-  // First check to see if user is logged or not
-  if (loginStatus === null) {
-    getAuthentication(dispatch)
-  } else if (loginStatus && email === '') {
-    // If user is logged and email is empty, check for user email
-    getUserMetadata(dispatch)
-  }
+const store = createStore(reducers)
 
-  // If user is not logged, return login form
-  if (loginStatus === false) return <LoginForm></LoginForm>
+function App() {
 
-  if (loginStatus && email !== '') return <AppRouter/>
-
-  return null
+  return (
+    <React.StrictMode>
+    <ApolloProvider client={client}>
+      <ReduxProvider store={store}>
+        <AppRouter/>
+      </ReduxProvider>
+    </ApolloProvider>
+  </React.StrictMode>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

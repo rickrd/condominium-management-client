@@ -1,29 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {config} from 'dotenv'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { config } from 'dotenv'
 
-import reducers from './redux/reducers'
 import App from './App'
-import * as serviceWorker from './serviceWorker'
 import './index.css'
 
-config({path: "../.env"})
+config({ path: '../.env' })
 
-const store = createStore(reducers)
+ReactDOM.render(<App />, document.getElementById('root'))
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-    <App />
-
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
