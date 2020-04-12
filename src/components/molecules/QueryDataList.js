@@ -85,9 +85,9 @@ const QueryDataList = ({ schema: { properties }, query: { name, value }, onRowCl
         <p>An error occured. Please try again</p>
       ) : (
         <TableContent>
-          {data[name].map((queryContent, i) => (
+          {data[name].map((dataItem, i) => (
             <TableRow
-              onClick={onRowClick ? () => onRowClick(queryContent) : () => true}
+              onClick={onRowClick ? () => onRowClick(dataItem) : () => true}
               key={i}
             >
               {propertiesKeys.map(property => {
@@ -97,8 +97,8 @@ const QueryDataList = ({ schema: { properties }, query: { name, value }, onRowCl
                 return (
                   <TableCell key={property}>
                     {renderCell
-                      ? renderCell(queryContent)
-                      : queryContent[property]}
+                      ? renderCell(dataItem)
+                      : dataItem[property]}
                   </TableCell>
                 )
               })}

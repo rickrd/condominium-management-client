@@ -5,8 +5,12 @@ import ConfigurationPage from '../templates/ConfigurationPage'
 const GET_APARTMENTS = gql`
   {
     apartments {
-      number
       _id
+      number
+      block
+      residents {
+        name
+      }
     }
   }
 `
@@ -22,10 +26,17 @@ const apartmentSchema = {
       title: 'Block',
       type: 'text',
     },
+    residents: {
+      title: 'Residents',
+      type: 'array',
+      renderCell: ({residents}) => {
+        return residents.map((resident) => <span>{resident.name}</span>)
+      },
+    },
   },
   listingQuery: {
-    name: "apartments",
-    value: GET_APARTMENTS
+    name: 'apartments',
+    value: GET_APARTMENTS,
   },
 }
 
