@@ -1,7 +1,8 @@
 import React from 'react'
+
 import Home from '../components/pages/Home'
-import ApartmentsList from '../components/organisms/ApartmentsList'
-import ApartmentDetail from '../components/organisms/ApartmentDetail'
+import ApartmentConfigurationPage from '../components/pages/ApartmentConfigurationPage'
+import ApartmentEditPage from '../components/pages/ApartmentEditPage'
 
 export const routes = [
   {
@@ -14,14 +15,14 @@ export const routes = [
   {
     title: 'Apartments List',
     path: '/apartments',
-    component: <ApartmentsList />,
+    component: <ApartmentConfigurationPage />,
     isMenuItem: true,
     exact: true,
   },
   {
-    title: 'Apartment Detail',
-    path: '/apartments/:_id',
-    component: <ApartmentDetail />,
+    title: 'Apartment Edit',
+    path: '/apartments/edit/:_id',
+    component: <ApartmentEditPage />,
     isMenuItem: false,
     exact: false,
   },
