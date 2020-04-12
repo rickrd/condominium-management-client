@@ -3,12 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.4",
     "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/dotenv": "^8.2.0",
+    "apollo-boost": "^0.4.7",
+    "apollo-client": "^2.6.8",
+    "apollo-link": "^1.2.14",
     "dotenv": "^8.2.0",
+    "graphql": "^15.0.0",
+    "graphql-anywhere": "^4.2.6",
+    "graphql-tag": "^2.10.3",
     "magic-sdk": "0.1.0-beta.14",
+    "qs": "^6.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -18,7 +28,7 @@
     "styled-components": "^5.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
