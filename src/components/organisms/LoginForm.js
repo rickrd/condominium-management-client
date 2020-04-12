@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Icon, Button, TextField } from '@material-ui/core'
+import { Icon, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
-import { handleLogin } from '../../contexts/Authentication'
+import { useAuthentication } from '../../hooks/useAuthentication'
+import { updateUserLoginStatus } from '../../redux/actions'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoginFormWrapper = styled.div`
-position: absolute;
+  position: absolute;
   width: 280px;
   height: 120px;
   left: 50%;
@@ -30,12 +31,19 @@ position: absolute;
 const LoginForm = (props) => {
   const classes = useStyles()
 
+  const { handleLogin } = useAuthentication()
+
   const { dispatch } = props
+
+  const handleFormSubmit = async (e) => {
+    const isAuthenticated = await handleLogin(e)
+    dispatch(updateUserLoginStatus(isAuthenticated))
+  }
 
   return (
     <LoginFormWrapper>
       <p className="title">Please sign in to access this page:</p>
-      <form onSubmit={(e) => handleLogin(e, dispatch)}>
+      <form onSubmit={handleFormSubmit}>
         <TextField type="email" name="email" id="standard-basic" label="E-mail" required />
         <Button variant="contained" color="primary" type="submit" className={classes.button} endIcon={<Icon>send</Icon>}>
           Send

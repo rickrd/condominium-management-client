@@ -3,34 +3,33 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 
-import { handleLogout } from '../../contexts/Authentication'
+import { useAuthentication } from '../../hooks/useAuthentication'
+import { updateUserLoginStatus } from '../../redux/actions'
 
 const LogoutWrapper = styled.div`
   cursor: pointer;
 `
 
 const Logout = (props) => {
+  const { handleLogout } = useAuthentication()
+
   const {
     user: { loginStatus },
     dispatch,
   } = props
 
-  if (loginStatus)
-    return (
-      <LogoutWrapper>
-        <Button
-          onClick={() => {
-            handleLogout(dispatch)
-          }}
-          variant="contained"
-          color="secondary"
-        >
-          LOGOUT
-        </Button>
-      </LogoutWrapper>
-    )
+  const handleLogoutButtonClick = async () => {
+    const isLoggedOut = await handleLogout()
+    dispatch(updateUserLoginStatus(!isLoggedOut))
+  }
 
-  return null
+  return loginStatus ? (
+    <LogoutWrapper>
+      <Button onClick={handleLogoutButtonClick} variant="contained" color="secondary">
+        LOGOUT
+      </Button>
+    </LogoutWrapper>
+  ) : null
 }
 
 const mapStateToProps = (state) => {
