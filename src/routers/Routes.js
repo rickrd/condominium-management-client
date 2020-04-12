@@ -3,6 +3,7 @@ import React from 'react'
 import Home from '../components/pages/Home'
 import ApartmentConfigurationPage from '../components/pages/ApartmentConfigurationPage'
 import ApartmentEditPage from '../components/pages/ApartmentEditPage'
+import CreateApartmentForm from '../components/organisms/CreateApartmentForm'
 
 export const routes = [
   {
@@ -25,5 +26,12 @@ export const routes = [
     component: <ApartmentEditPage />,
     isMenuItem: false,
     exact: false,
+  },
+  {
+    title: 'Create Apartment',
+    path: '/apartments/create',
+    component: <CreateApartmentForm />,
+    isMenuItem: true,
+    exact: true,
   },
 ]

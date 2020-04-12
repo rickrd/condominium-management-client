@@ -1,6 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import ConfigurationPage from '../templates/ConfigurationPage'
+import CreateApartmentForm from '../organisms/CreateApartmentForm'
 
 const GET_APARTMENTS = gql`
   {
@@ -17,6 +18,7 @@ const GET_APARTMENTS = gql`
 
 const apartmentSchema = {
   name: 'apartment',
+  createPath: '/apartments/create',
   properties: {
     number: {
       title: 'Number',
@@ -29,7 +31,7 @@ const apartmentSchema = {
     residents: {
       title: 'Residents',
       type: 'array',
-      renderCell: ({residents}) => {
+      renderCell: ({ residents }) => {
         return residents.map((resident) => <span>{resident.name}</span>)
       },
     },
