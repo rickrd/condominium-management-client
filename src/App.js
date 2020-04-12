@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ResponsiveDrawer from './components/organisms/ResponsiveDrawer'
 import LoginForm from './components/organisms/LoginForm'
 import { getAuthentication, getUserMetadata } from './contexts/Authentication'
+import AppRouter from './routers/AppRouter'
 
 function App(props) {
   const {
@@ -22,7 +22,7 @@ function App(props) {
   // If user is not logged, return login form
   if (loginStatus === false) return <LoginForm></LoginForm>
 
-  if (loginStatus && email !== '') return <ResponsiveDrawer></ResponsiveDrawer>
+  if (loginStatus && email !== '') return <AppRouter/>
 
   return null
 }

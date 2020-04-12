@@ -1,21 +1,12 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
-import Drawer from '@material-ui/core/Drawer'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+import { AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, Toolbar, Typography, ListItem } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import MenuIcon from '@material-ui/icons/Menu'
+import { Link } from 'react-router-dom'
 
-import Home from '../pages/Home'
 import Logout from '../atoms/Logout'
 import Welcome from '../atoms/Welcome'
-import ApartmentsList from './ApartmentsList'
-import ApartmentDetail from './ApartmentDetail'
+import { routes } from '../../routers/Routes'
 
 const drawerWidth = 240
 
@@ -65,18 +56,18 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
+      <Welcome></Welcome>
+      <Logout></Logout>
       <Divider />
       <List>
-        <Welcome></Welcome>
-        <Link to="/">
-          <div>Home</div>
-        </Link>
-        <Link to="/apartments">
-          <div>Apartments List</div>
-        </Link>
-        <div>Create Apartment</div>
-        <div>Create Resident</div>
-        <Logout></Logout>
+        {routes &&
+          routes.map(({ path, title, isMenuItem }) =>
+            isMenuItem ? (
+              <ListItem>
+                <Link to={path}>{title}</Link>
+              </ListItem>
+            ) : null
+          )}
       </List>
       <Divider />
     </div>
@@ -84,61 +75,48 @@ function ResponsiveDrawer(props) {
 
   return (
     <div className={classes.root}>
-      <Router>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} className={classes.menuButton}></IconButton>
-            <Typography variant="h6" noWrap>
-              CONDOMINIUM MANAGEMENT
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route path="/apartments/:_id" children={<ApartmentDetail/>}>
-            </Route>
-            <Route path="/apartments">
-              <ApartmentsList/>
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </main>
-      </Router>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} className={classes.menuButton}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            CONDOMINIUM MANAGEMENT
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
     </div>
   )
 }
