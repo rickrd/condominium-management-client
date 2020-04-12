@@ -2,7 +2,7 @@ import { UPDATE_USER_EMAIL, UPDATE_USER_LOGIN_STATUS} from './actions'
 
 const initialState = {
   user: {
-    loginStatus: null,
+    loginStatus: false,
     email: ''
   }
 }

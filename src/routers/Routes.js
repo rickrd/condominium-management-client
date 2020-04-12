@@ -1,7 +1,7 @@
 import React from 'react'
-import Home from "../components/pages/Home";
-import ApartmentsList from '../components/organisms/ApartmentsList';
-import ApartmentDetail from '../components/organisms/ApartmentDetail';
+import Home from '../components/pages/Home'
+import ApartmentsList from '../components/organisms/ApartmentsList'
+import ApartmentDetail from '../components/organisms/ApartmentDetail'
 
 export const routes = [
   {

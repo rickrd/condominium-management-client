@@ -5,11 +5,6 @@ import ApartmentsList from '../organisms/ApartmentsList'
 
 const HomeWrapper = styled.div`
   margin: 0;
-  font-family: 'Roboto';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #FAFAFF;
-  color: #212121;
 `
 
 const Home = () => {

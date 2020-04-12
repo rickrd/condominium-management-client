@@ -63,7 +63,7 @@ function ResponsiveDrawer(props) {
         {routes &&
           routes.map(({ path, title, isMenuItem }) =>
             isMenuItem ? (
-              <ListItem>
+              <ListItem key={path}>
                 <Link to={path}>{title}</Link>
               </ListItem>
             ) : null
