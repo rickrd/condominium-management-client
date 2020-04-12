@@ -17,7 +17,7 @@ const TableRow = styled.div`
   &:hover {
     background: #f7f9fa;
     cursor: pointer;
-    color: #1b5e20;
+    color: #303F9F;
   }
 `
 

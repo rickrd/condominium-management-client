@@ -4,19 +4,18 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { routes } from './Routes'
-import ResponsiveDrawer from '../components/organisms/ResponsiveDrawer'
 import LoginForm from '../components/organisms/LoginForm'
 import { updateUserLoginStatus, updateUserEmail } from '../redux/actions'
 import { useAuthentication } from '../hooks/useAuthentication'
+import Header from '../components/molecules/Header'
 
 const StyledMainWrapper = styled.div`
   display: flex;
-  margin-top: 80px;
   padding: 0 16px;
 
   @media (min-width: 600px) {
     max-width: 600px;
-    margin: 88px auto 0 264px;
+    margin: 0 auto
   }
 `
 
@@ -50,7 +49,7 @@ const AppRouter = (props) => {
 
   return (
     <BrowserRouter>
-      <ResponsiveDrawer />
+      <Header/>
       <StyledMainWrapper>
         <Switch>
           {routes &&
