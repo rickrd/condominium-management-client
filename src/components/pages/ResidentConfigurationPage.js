@@ -17,7 +17,7 @@ const GET_RESIDENTS = gql`
 
 const residentSchema = {
   name: 'resident',
-  createPath: '/residents/create',
+  createPath: '/apartments/create',
   properties: {
     name: {
       title: 'Name',

@@ -74,6 +74,7 @@ const MobileMenu = styled.div`
   position: fixed;
   visibility: hidden;
   flex-wrap: wrap;
+  top: 0;
   width: 100vw;
   height: 100vh;
   padding: 1.5em 2em;

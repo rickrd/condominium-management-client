@@ -22,6 +22,13 @@ export const routes = [
     exact: true,
   },
   {
+    title: 'RESIDENTS LIST',
+    path: '/residents',
+    component: <ResidentConfigurationPage />,
+    isMenuItem: true,
+    exact: true,
+  },
+  {
     title: 'APARTMENT EDIT',
     path: '/apartments/edit/:_id',
     component: <ApartmentEditPage />,
@@ -32,13 +39,6 @@ export const routes = [
     title: 'CREATE APARTMENT',
     path: '/apartments/create',
     component: <CreateApartmentForm />,
-    isMenuItem: true,
-    exact: true,
-  },
-  {
-    title: 'RESIDENTS LIST',
-    path: '/residents',
-    component: <ResidentConfigurationPage />,
     isMenuItem: true,
     exact: true,
   },

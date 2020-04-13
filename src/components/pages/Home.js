@@ -7,6 +7,7 @@ import ResidentConfigurationPage from './ResidentConfigurationPage'
 
 const HomeWrapper = styled.div`
   margin: 0;
+  max-width: 100%;
 `
 
 const Home = () => {
