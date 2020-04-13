@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStore } from 'redux'
 import { Provider as ReduxProvider } from 'react-redux'
-import ApolloClient from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 
 import reducers from './redux/reducers'
@@ -10,6 +10,9 @@ import AppRouter from './routers/AppRouter'
 // setup your client
 const client = new ApolloClient({
   uri: 'http://localhost:3000/dev/graphql',
+  cache: new InMemoryCache({
+    addTypename: false
+  })
 })
 
 const store = createStore(reducers)

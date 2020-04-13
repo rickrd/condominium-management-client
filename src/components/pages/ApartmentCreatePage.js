@@ -13,6 +13,9 @@ const CREATE_APARTMENT = gql`
         block
         residents {
           name
+          birthdate
+          phone
+          email
         }
       }
     }
