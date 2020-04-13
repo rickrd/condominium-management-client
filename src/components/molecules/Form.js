@@ -1,12 +1,12 @@
 import React from 'react'
 import { Formik, FieldArray } from 'formik'
-import {useMutation} from '@apollo/react-hooks'
+import { useMutation } from '@apollo/react-hooks'
 
 import Button from '../atoms/Button'
 import InputField from '../atoms/InputField'
 
 const Form = ({ initialValues, mutation }) => {
-  const [mutationAction, {data}] = useMutation(mutation)
+  const [mutationAction, { data }] = useMutation(mutation)
   return (
     <Formik
       initialValues={initialValues}
@@ -56,11 +56,13 @@ const Form = ({ initialValues, mutation }) => {
                     />
                     <InputField name={`residents.${index}.phone`} label={`Resident ${index + 1} Phone`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].phone} required />
                     <InputField name={`residents.${index}.email`} label={`Resident ${index + 1} E-mail`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].email} required />
-                    <Button
-                      type="button"
-                      onClick={() => arrayHelpers.remove(index)}
-                      text="-" // remove a friend from the list
-                    ></Button>
+                    {values.residents.length > 1 && (
+                      <Button
+                        type="button"
+                        onClick={() => arrayHelpers.remove(index)}
+                        text="-" // remove a friend from the list
+                      ></Button>
+                    )}
                   </div>
                 ))}
                 <Button type="button" onClick={() => arrayHelpers.push('')} text="Add a resident"></Button>
