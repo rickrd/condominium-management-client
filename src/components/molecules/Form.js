@@ -4,9 +4,13 @@ import { useMutation } from '@apollo/react-hooks'
 
 import Button from '../atoms/Button'
 import InputField from '../atoms/InputField'
+import { useHistory } from 'react-router-dom'
 
 const Form = ({ initialValues, mutation }) => {
   const [mutationAction, { data }] = useMutation(mutation)
+
+  const history = useHistory()
+
   return (
     <Formik
       initialValues={initialValues}
@@ -30,6 +34,9 @@ const Form = ({ initialValues, mutation }) => {
             },
           })
           setSubmitting(false)
+          setTimeout(() => {
+            history.push('/')
+          }, 1000)
         }, 400)
       }}
     >
