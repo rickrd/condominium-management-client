@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { updateUserLoginStatus } from '../../redux/actions'
+import Button from '../atoms/Button'
+import InputField from '../atoms/InputField'
 
 const LoginFormWrapper = styled.div`
   position: absolute;
@@ -34,10 +36,8 @@ const LoginForm = (props) => {
     <LoginFormWrapper>
       <p className="title">Please sign in to access this page:</p>
       <form onSubmit={handleFormSubmit}>
-        <input type="email" name="email" id="standard-basic" label="E-mail" required />
-        <button variant="contained" color="primary" type="submit">
-          Send
-        </button>
+        <InputField type="email" name="email" label="E-mail" required />
+        <Button type="submit" text="Send"></Button>
       </form>
     </LoginFormWrapper>
   )

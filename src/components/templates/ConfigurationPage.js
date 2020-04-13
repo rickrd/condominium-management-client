@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import QueryDataList from '../molecules/QueryDataList'
 import { Redirect, NavLink } from 'react-router-dom'
+import Button from '../atoms/Button'
 
 const StyledConfigurationPageMain = styled.main`
   width: 100%;
@@ -10,14 +11,13 @@ const StyledConfigurationPageMain = styled.main`
 
 const ConfigurationPage = ({ schema }) => {
   const { name, properties, listingQuery, createPath } = schema
-  console.log(listingQuery.nesting)
 
   return (
     <StyledConfigurationPageMain>
       <header>
         <h1 className="title">{name.toUpperCase()}(S)</h1>
         <NavLink to={createPath}>
-          <button>create {name}</button>
+          <Button text={`create ${name}`}></Button>
         </NavLink>
       </header>
 

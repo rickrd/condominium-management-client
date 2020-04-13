@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { updateUserLoginStatus } from '../../redux/actions'
+import Button from './Button'
 
 const LogoutWrapper = styled.div`
   cursor: pointer;
@@ -24,9 +25,7 @@ const Logout = (props) => {
 
   return loginStatus ? (
     <LogoutWrapper>
-      <button onClick={handleLogoutButtonClick} variant="contained" color="secondary">
-        LOGOUT
-      </button>
+      <Button onClick={handleLogoutButtonClick} text="LOGOUT"></Button>
     </LogoutWrapper>
   ) : null
 }

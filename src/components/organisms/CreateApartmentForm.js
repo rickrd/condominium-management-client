@@ -2,6 +2,8 @@ import React from 'react'
 import { Formik, Form, FieldArray } from 'formik'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import Button from '../atoms/Button'
+import InputField from '../atoms/InputField'
 // $number: Int!, $block: String!, $residents: [ResidentInput]!
 const CREATE_APARTMENT = gql`
   mutation createApartment($input: CreateApartmentInput!) {
@@ -54,9 +56,9 @@ const CreateApartmentForm = () => {
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Form>
           <h1>CREATE APARTMENT:</h1>
-          <input type="text" name="number" placeholder="Number" onChange={handleChange} onBlur={handleBlur} value={values.number} />
+          <InputField type="text" name="number" label="Number" onChange={handleChange} onBlur={handleBlur} value={values.number} required/>
           {errors.number && touched.number && errors.number}
-          <input type="text" name="block" placeholder="Block" onChange={handleChange} onBlur={handleBlur} value={values.block} />
+          <InputField type="text" name="block" label="Block" onChange={handleChange} onBlur={handleBlur} value={values.block} required/>
           {errors.block && touched.block && errors.block}
           <FieldArray
             name="residents"
@@ -64,33 +66,22 @@ const CreateApartmentForm = () => {
               <div>
                 {values.residents.map((resident, index) => (
                   <div key={index}>
-                    <input name={`residents.${index}.name`} placeholder="Resident Name" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].name} />
-                    <input name={`residents.${index}.birthdate`} placeholder="Resident Birthdate" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].birthdate} />
-                    <input name={`residents.${index}.phone`} placeholder="Resident Phone" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].phone} />
-                    <input name={`residents.${index}.email`} placeholder="Resident E-mail" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].email} />
-                    <button
+                    <InputField name={`residents.${index}.name`} label={`Resident ${index + 1} Name`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].name} required/>
+                    <InputField name={`residents.${index}.birthdate`} label={`Resident ${index + 1} Birthdate`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].birthdate} required/>
+                    <InputField name={`residents.${index}.phone`} label={`Resident ${index + 1} Phone`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].phone} required/>
+                    <InputField name={`residents.${index}.email`} label={`Resident ${index + 1} E-mail`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].email} required/>
+                    <Button
                       type="button"
-                      onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                    >
-                      -
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
-                    >
-                      +
-                    </button>
+                      onClick={() => arrayHelpers.remove(index)}
+                      text="-" // remove a friend from the list
+                    ></Button>
                   </div>
                 ))}
-                <button type="button" onClick={() => arrayHelpers.push('')}>
-                  Add a resident
-                </button>
+                <Button type="button" onClick={() => arrayHelpers.push('')} text="Add a resident"></Button>
               </div>
             )}
           ></FieldArray>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
+          <Button type="submit" disabled={isSubmitting} text="Submit"></Button>
         </Form>
       )}
     </Formik>
