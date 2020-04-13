@@ -1,5 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
+
 import ConfigurationPage from '../templates/ConfigurationPage'
 
 const GET_APARTMENTS = gql`
@@ -31,7 +32,7 @@ const apartmentSchema = {
       title: 'Residents',
       type: 'array',
       renderCell: ({ residents }) => {
-        return residents.map(({name}) => (
+        return residents.map(({ name }) => (
           <span>
             {name}
             <br />
@@ -44,6 +45,7 @@ const apartmentSchema = {
     value: GET_APARTMENTS,
     nest: ['apartments'],
   },
+  onRowClick: ({ _id }) => `/apartments/edit/${_id}`
 }
 
 const ApartmentConfigurationPage = () => {

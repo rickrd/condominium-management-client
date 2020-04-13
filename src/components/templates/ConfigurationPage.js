@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import QueryDataList from '../molecules/QueryDataList'
-import { Redirect, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Button from '../atoms/Button'
 
 const StyledConfigurationPageMain = styled.main`
@@ -10,12 +10,13 @@ const StyledConfigurationPageMain = styled.main`
 `
 
 const ConfigurationPage = ({ schema }) => {
-  const { name, properties, listingQuery, createPath } = schema
+  const { name, listingQuery, createPath, onRowClick = false } = schema
 
   return (
     <StyledConfigurationPageMain>
       <header>
         <h1 className="title">{name.toUpperCase()}(S)</h1>
+        {onRowClick && <p>You can click on row to view and edit details.</p>}
         <NavLink to={createPath}>
           <Button text={`create ${name}`}></Button>
         </NavLink>

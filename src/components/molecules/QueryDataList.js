@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const Table = styled.div`
   padding: 1em;
@@ -69,10 +70,17 @@ const renderTableHeader = (propertiesKeys, properties) => (
  * @param {Object} query The query used for getting and populating data
  * @param {Function} onRowClick The handler that will be called when clicking on a row
  */
-const QueryDataList = ({ schema: { properties }, query: { value, nest }, onRowClick = false }) => {
+const QueryDataList = ({ schema: { properties, onRowClick = false }, query: { value, nest } }) => {
   const { loading, error, data } = useQuery(value)
 
   const propertiesKeys = Object.keys(properties)
+
+  const history = useHistory()
+
+  const handleClick = (path) => {
+    history.push(path)
+  }
+
   return (
     <Table>
       {renderTableHeader(propertiesKeys, properties)}
@@ -84,7 +92,7 @@ const QueryDataList = ({ schema: { properties }, query: { value, nest }, onRowCl
         <TableContent>
           {data[nest[0]].map((dataItem, i) => {
             return nest.length <= 1 ? (
-              <TableRow onClick={onRowClick ? () => onRowClick(dataItem) : () => true} key={i}>
+              <TableRow onClick={onRowClick ? () => handleClick(onRowClick(dataItem)) : () => true} key={i}>
                 {propertiesKeys.map((property) => {
                   const currentProperty = properties[property]
                   const { renderCell } = currentProperty
