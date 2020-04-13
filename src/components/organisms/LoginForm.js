@@ -1,17 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Icon, Button, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import styled from 'styled-components'
 
 import { useAuthentication } from '../../hooks/useAuthentication'
 import { updateUserLoginStatus } from '../../redux/actions'
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-}))
 
 const LoginFormWrapper = styled.div`
   position: absolute;
@@ -29,8 +21,6 @@ const LoginFormWrapper = styled.div`
 `
 
 const LoginForm = (props) => {
-  const classes = useStyles()
-
   const { handleLogin } = useAuthentication()
 
   const { dispatch } = props
@@ -44,10 +34,10 @@ const LoginForm = (props) => {
     <LoginFormWrapper>
       <p className="title">Please sign in to access this page:</p>
       <form onSubmit={handleFormSubmit}>
-        <TextField type="email" name="email" id="standard-basic" label="E-mail" required />
-        <Button variant="contained" color="primary" type="submit" className={classes.button} endIcon={<Icon>send</Icon>}>
+        <input type="email" name="email" id="standard-basic" label="E-mail" required />
+        <button variant="contained" color="primary" type="submit">
           Send
-        </Button>
+        </button>
       </form>
     </LoginFormWrapper>
   )
