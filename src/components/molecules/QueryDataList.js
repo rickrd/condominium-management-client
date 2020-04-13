@@ -1,10 +1,11 @@
-import React from "react"
-import { useQuery } from "@apollo/react-hooks"
-import styled from "styled-components"
+import React from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import styled from 'styled-components'
 
 const Table = styled.div`
   padding: 1em;
   border: 1px solid #e3e4e6;
+  max-width: 100%;
 `
 
 const TableRow = styled.div`
@@ -17,7 +18,7 @@ const TableRow = styled.div`
   &:hover {
     background: #f7f9fa;
     cursor: pointer;
-    color: #303F9F;
+    color: #303f9f;
   }
 `
 
@@ -52,15 +53,11 @@ const TableContent = styled.div`
  */
 const renderTableHeader = (propertiesKeys, properties) => (
   <HeaderTableRow>
-    {propertiesKeys.map(propertyKey => {
+    {propertiesKeys.map((propertyKey) => {
       const currentProperty = properties[propertyKey]
       const { title } = currentProperty
 
-      return (
-        <HeaderTableCell key={propertyKey}>
-          {title}
-        </HeaderTableCell>
-      )
+      return <HeaderTableCell key={propertyKey}>{title}</HeaderTableCell>
     })}
   </HeaderTableRow>
 )
@@ -72,7 +69,7 @@ const renderTableHeader = (propertiesKeys, properties) => (
  * @param {Object} query The query used for getting and populating data
  * @param {Function} onRowClick The handler that will be called when clicking on a row
  */
-const QueryDataList = ({ schema: { properties }, query: { name, value }, onRowClick = false }) => {
+const QueryDataList = ({ schema: { properties }, query: { value, nest }, onRowClick = false }) => {
   const { loading, error, data } = useQuery(value)
 
   const propertiesKeys = Object.keys(properties)
@@ -85,25 +82,29 @@ const QueryDataList = ({ schema: { properties }, query: { name, value }, onRowCl
         <p>An error occured. Please try again</p>
       ) : (
         <TableContent>
-          {data[name].map((dataItem, i) => (
-            <TableRow
-              onClick={onRowClick ? () => onRowClick(dataItem) : () => true}
-              key={i}
-            >
-              {propertiesKeys.map(property => {
-                const currentProperty = properties[property]
-                const {  renderCell } = currentProperty
+          {data[nest[0]].map((dataItem, i) => {
+            return nest.length <= 1 ? (
+              <TableRow onClick={onRowClick ? () => onRowClick(dataItem) : () => true} key={i}>
+                {propertiesKeys.map((property) => {
+                  const currentProperty = properties[property]
+                  const { renderCell } = currentProperty
 
-                return (
-                  <TableCell key={property}>
-                    {renderCell
-                      ? renderCell(dataItem)
-                      : dataItem[property]}
-                  </TableCell>
-                )
-              })}
-            </TableRow>
-          ))}
+                  return <TableCell key={property}>{renderCell ? renderCell(dataItem) : dataItem[property]}</TableCell>
+                })}
+              </TableRow>
+            ) : (
+              dataItem[nest[1]].map((item, i) => (
+                <TableRow onClick={onRowClick ? () => onRowClick(item) : () => true} key={i}>
+                  {propertiesKeys.map((property) => {
+                    const currentProperty = properties[property]
+                    const { renderCell } = currentProperty
+
+                    return <TableCell key={property}>{renderCell ? renderCell(item) : item[property]}</TableCell>
+                  })}
+                </TableRow>
+              ))
+            )
+          })}
         </TableContent>
       )}
     </Table>

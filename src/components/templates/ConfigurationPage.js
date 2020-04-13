@@ -6,19 +6,16 @@ import { Redirect, NavLink } from 'react-router-dom'
 
 const StyledConfigurationPageMain = styled.main`
   width: 100%;
-
-  .title {
-    margin-top: 0;
-  }
 `
 
 const ConfigurationPage = ({ schema }) => {
   const { name, properties, listingQuery, createPath } = schema
+  console.log(listingQuery.nesting)
 
   return (
     <StyledConfigurationPageMain>
       <header>
-        <h1 className="title">{name}(s)</h1>
+        <h1 className="title">{name.toUpperCase()}(S)</h1>
         <NavLink to={createPath}>
           <button>create {name}</button>
         </NavLink>

@@ -22,10 +22,7 @@ const CreateApartmentForm = () => {
   const initialValues = {
     number: '',
     block: '',
-    residents: [
-      { name: 'Ricardo', birthdate: '28/04/1999', phone: '992577885', email: 'desouzaricardoc@gmail.com' },
-      { name: 'Ricardo', birthdate: '28/04/1999', phone: '992577885', email: 'desouzaricardoc@gmail.com' },
-    ],
+    residents: [{ name: '', birthdate: '', phone: '', email: '' }],
   }
 
   return (
@@ -56,7 +53,7 @@ const CreateApartmentForm = () => {
     >
       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Form>
-          <h1>Create apartment:</h1>
+          <h1>CREATE APARTMENT:</h1>
           <input type="text" name="number" placeholder="Number" onChange={handleChange} onBlur={handleBlur} value={values.number} />
           {errors.number && touched.number && errors.number}
           <input type="text" name="block" placeholder="Block" onChange={handleChange} onBlur={handleBlur} value={values.block} />
@@ -67,10 +64,10 @@ const CreateApartmentForm = () => {
               <div>
                 {values.residents.map((resident, index) => (
                   <div key={index}>
-                    <input name={`residents.${index}.name`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].name} />
-                    <input name={`residents.${index}.birthdate`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].birthdate} />
-                    <input name={`residents.${index}.phone`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].phone} />
-                    <input name={`residents.${index}.email`} onChange={handleChange} onBlur={handleBlur} value={values.residents[index].email} />
+                    <input name={`residents.${index}.name`} placeholder="Resident Name" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].name} />
+                    <input name={`residents.${index}.birthdate`} placeholder="Resident Birthdate" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].birthdate} />
+                    <input name={`residents.${index}.phone`} placeholder="Resident Phone" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].phone} />
+                    <input name={`residents.${index}.email`} placeholder="Resident E-mail" onChange={handleChange} onBlur={handleBlur} value={values.residents[index].email} />
                     <button
                       type="button"
                       onClick={() => arrayHelpers.remove(index)} // remove a friend from the list

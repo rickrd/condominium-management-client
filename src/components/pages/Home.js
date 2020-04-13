@@ -2,40 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-
-const GET_RESIDENTS = gql`
-  {
-    apartments {
-      residents {
-        _id
-        name
-      }
-    }
-  }
-`
+import ApartmentConfigurationPage from './ApartmentConfigurationPage'
+import ResidentConfigurationPage from './ResidentConfigurationPage'
 
 const HomeWrapper = styled.div`
   margin: 0;
 `
 
 const Home = () => {
-  const { loading, error, data } = useQuery(GET_RESIDENTS)
-
   return (
     <HomeWrapper>
+      <h1>CONDOMINIUM MANAGEMENT</h1>
+      <p>Here you can manage the apartments and residents of your condominium.</p>
       <h2>LIST OF ALL APARTMENTS:</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>An error occured. Please try again</p>
-      ) : (
-        <div>
-          <h2>LIST OF ALL RESIDENTS:</h2>
-          {console.log(data)}
-          {data.apartments.map(({ residents }) => residents.map((resident) => <div>{resident.name}</div>)
-          )}
-        </div>
-      )}
+      <ApartmentConfigurationPage />
+      <h2>LIST OF ALL RESIDENTS:</h2>
+      <ResidentConfigurationPage />
     </HomeWrapper>
   )
 }
