@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 import ExitIcon from "../atoms/ExitIcon"
+import Logo from '../atoms/Logo'
 import {routes} from '../../routers/Routes'
 
 const StyledHeader = styled.header`
@@ -16,9 +17,9 @@ const StyledHeader = styled.header`
   line-height: 70px;
 `
 
-const Title = styled.h1`
+const Brand = styled.div`
   margin: 0;
-  padding: 0 2em 0 1em;
+  padding: 0.15em 2em;
   border-right: 2px solid #f8f8f9;
   font-size: 1.5em;
   color: #212121;
@@ -44,11 +45,6 @@ const Navigation = styled.nav`
   @media (min-width: 60em) {
     display: block;
   }
-`
-
-const StyledLink = styled(StyledNavLink)`
-  margin: 0;
-  color: #212121;
 `
 
 const MenuToggleBar = styled.span`
@@ -110,11 +106,11 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Title>
-        <Link href="/">
-          <StyledLink>CONDOMINIUM</StyledLink>
-        </Link>
-      </Title>
+      <Brand>
+        <NavLink to="/">
+          <Logo></Logo>
+        </NavLink>
+      </Brand>
 
       <Navigation>
         {routes.map(({ title, path, isMenuItem }, index) => isMenuItem && (
