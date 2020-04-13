@@ -9,6 +9,7 @@ const CREATE_APARTMENT = gql`
   mutation createApartment($input: CreateApartmentInput!) {
     createApartment(input: $input) {
       apartment {
+        _id
         number
         block
         residents {

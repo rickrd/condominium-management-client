@@ -7,11 +7,12 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import reducers from './redux/reducers'
 import AppRouter from './routers/AppRouter'
 
-// setup your client
+// client setup (should use .env, skipped due to the test)
 const client = new ApolloClient({
   uri: 'http://localhost:3000/dev/graphql',
   cache: new InMemoryCache({
-    addTypename: false
+    addTypename: false,
+    dataIdFromObject: o => o._id
   })
 })
 

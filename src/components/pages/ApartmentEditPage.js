@@ -8,6 +8,7 @@ const UPDATE_APARTMENT = gql`
   mutation updateApartment($input: UpdateApartmentInput!) {
     updateApartment(input: $input) {
       apartment {
+        _id
         number
         block
         residents {
