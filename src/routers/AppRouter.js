@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { routes } from './Routes'
-import LoginForm from '../components/organisms/LoginForm'
+import LoginForm from '../components/molecules/LoginForm'
 import { updateUserLoginStatus, updateUserEmail } from '../redux/actions'
 import { useAuthentication } from '../hooks/useAuthentication'
 import Header from '../components/molecules/Header'

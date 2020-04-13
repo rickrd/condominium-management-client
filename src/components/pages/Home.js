@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import ApartmentConfigurationPage from './ApartmentConfigurationPage'
 import ResidentConfigurationPage from './ResidentConfigurationPage'
 
