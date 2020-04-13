@@ -9,7 +9,7 @@ import AppRouter from './routers/AppRouter'
 
 // client setup (should use .env, skipped due to the test)
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/dev/graphql',
+  uri: 'https://65ov7i8qee.execute-api.us-east-1.amazonaws.com/dev/graphql',
   cache: new InMemoryCache({
     addTypename: false,
     dataIdFromObject: o => o._id
