@@ -25,27 +25,27 @@ const AppRouter = (props) => {
     dispatch,
   } = props
 
-  const { getAuthentication, getUserMetadata } = useAuthentication()
+  // const { getAuthentication, getUserMetadata } = useAuthentication()
 
   /** componentDidMount as hook */
-  useEffect(() => {
-    async function handleUserAuthentication() {
-      // First check to see if user is logged or not
-      if (!loginStatus) {
-        const isAuthenticated = await getAuthentication()
-        dispatch(updateUserLoginStatus(isAuthenticated))
-      } else if (loginStatus && email === '') {
-        // If user is logged and email is empty, check for user email
-        const magicUser = await getUserMetadata()
-        dispatch(updateUserEmail(magicUser.email))
-      }
-    }
+  // useEffect(() => {
+  //   async function handleUserAuthentication() {
+  //     // First check to see if user is logged or not
+  //     if (!loginStatus) {
+  //       const isAuthenticated = await getAuthentication()
+  //       dispatch(updateUserLoginStatus(isAuthenticated))
+  //     } else if (loginStatus && email === '') {
+  //       // If user is logged and email is empty, check for user email
+  //       const magicUser = await getUserMetadata()
+  //       dispatch(updateUserEmail(magicUser.email))
+  //     }
+  //   }
 
-    handleUserAuthentication()
-  }, [dispatch, email, loginStatus, getAuthentication, getUserMetadata])
+  //   handleUserAuthentication()
+  // }, [dispatch, email, loginStatus, getAuthentication, getUserMetadata])
 
-  // If user is not logged, return login form
-  if (!loginStatus) return <LoginForm></LoginForm>
+  // // If user is not logged, return login form
+  // if (!loginStatus) return <LoginForm></LoginForm>
 
   return (
     <BrowserRouter>
