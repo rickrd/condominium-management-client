@@ -2,7 +2,7 @@ import { Magic } from 'magic-sdk'
 
 const useAuthentication = () => {
   // magic setup (should use .env, skipped due to the test)
-  const magic = new Magic(`pk_test_6970A26FFDFDB9AD`)
+  const magic = new Magic(`pk_live_0638FF936924A245`)
 
   const handleLogin = async (e) => {
     e.preventDefault()
